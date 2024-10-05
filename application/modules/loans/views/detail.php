@@ -6,45 +6,45 @@
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header hidden-print">Invoice <small>transaction...</small></h1>
+    <h1 class="page-header hidden-print">Invoice <small>peminjaman...</small></h1>
     <!-- end page-header -->
     <!-- begin invoice -->
     <div class="invoice">
         <!-- begin invoice-company -->
         <div class="invoice-company">
             <span class="pull-right hidden-print">
-                <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-white m-b-10"><i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Print</a>
+                <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-white m-b-10"><i
+                        class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Print</a>
             </span>
-            <img src="<?= base_url('assets/img/logo/lorem_ipsum.png'); ?>" width="15%" />
+            <img src="<?= base_url('assets/img/logo/logo_usk.png'); ?>" width="10%" />
         </div>
         <!-- end invoice-company -->
         <!-- begin invoice-header -->
         <div class="invoice-header">
             <div class="invoice-from">
-                <small>from</small>
+                <small>Peminjam</small>
                 <address class="m-t-5 m-b-5">
-                    <strong class="text-inverse">ExDrogoz</strong><br />
-                    Jl. Rajabrana<br />
-                    Jawa Barat, 16453<br />
-                    Phone: 08123456789
+                    <strong class="text-inverse"><?= $loans->first_name ?></strong><br />
+                    Nip/Npm: <?= $loans->username ?><br />
+                    Email: <?= $loans->email ?><br />
                 </address>
             </div>
             <div class="invoice-to">
-                <small>to</small>
+                <small>Tanggal</small>
                 <address class="m-t-5 m-b-5">
-                    <strong class="text-inverse"><?= $transaction->shop ?></strong><br />
-                    <?= $transaction->delivery_address ?><br />
-                    Name: <?= $transaction->name ?><br />
-                    Phone: <?= $transaction->phone ?><br />
+                    Pinjam: <?php $date = date_create($loans->start_date);
+                            echo date_format($date, "F d, Y") ?><br />
+                    Dikembalikan: <?php $date = date_create($loans->end_date);
+                                    echo date_format($date, "F d, Y") ?><br />
                 </address>
             </div>
             <div class="invoice-date">
-                <small>Invoice / <?php $date = date_create($transaction->created_at);
+                <small>Invoice / <?php $date = date_create($loans->created_at);
                                     echo date_format($date, "F") ?> period</small>
-                <div class="date text-inverse m-t-5"><?php $date = date_create($transaction->created_at);
+                <div class="date text-inverse m-t-5"><?php $date = date_create($loans->created_at);
                                                         echo date_format($date, "F d, Y") ?></div>
                 <div class="invoice-detail">
-                    <font class="font-weight-bold" style="color: #FE7E2D;">#<?= $transaction->invoice_no ?></font>
+                    <font class="font-weight-bold" style="color: #FE7E2D;">#<?= $loans->invoice ?></font>
                 </div>
             </div>
         </div>
@@ -56,24 +56,18 @@
                 <table class="table table-invoice">
                     <thead>
                         <tr>
-                            <th>PRODUCT</th>
-                            <th class="text-center" width="10%">SKU</th>
-                            <th class="text-center" width="10%">HARGA</th>
-                            <th class="text-center" width="10%">QUANTITY</th>
-                            <th class="text-right" width="20%">TOTAL</th>
+                            <th>Alat</th>
+                            <th class="text-center" width="10%">Quantity</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($det_transaction as $r) { ?>
-                            <tr>
-                                <td>
-                                    <span class="text-inverse"><?= $r->name ?></span><br />
-                                </td>
-                                <td class="text-center"><?= $r->sku ?></td>
-                                <td class="text-right"><?= number_format($r->price, 0) ?></td>
-                                <td class="text-center"><?= $r->quantity ?></td>
-                                <td class="text-right"><?= number_format($r->quantity * $r->price, 0) ?></td>
-                            <tr>
+                        <?php foreach ($detail_loans as $r) { ?>
+                        <tr>
+                            <td>
+                                <span class="text-inverse"><?= $r->name ?></span><br />
+                            </td>
+                            <td class="text-right"><?= $r->qty ?> Item</td>
+                        <tr>
                             <?php } ?>
                     </tbody>
                 </table>
@@ -86,7 +80,7 @@
                     </div>
                 </div>
                 <div class="invoice-price-right">
-                    <small>TOTAL</small> <span class="f-w-600"><?= number_format($transaction->amount, 2) ?></span>
+                    <small>TOTAL</small> <span class="f-w-600"><?= $loans->amount ?> Item</span>
                 </div>
             </div>
             <!-- end invoice-price -->
@@ -95,7 +89,8 @@
         <!-- begin invoice-note -->
         <div class="invoice-note">
             Invoice ini sah dan diproses oleh komputer<br />
-            Silahkan hubungi <font class="font-weight-bold" style="color: #FE7E2D;">Call Center</font> apabila kamu membutuhkan bantuan
+            Silahkan hubungi <font class="font-weight-bold" style="color: #FE7E2D;">Call Center</font> apabila kamu
+            membutuhkan bantuan
         </div>
         <!-- end invoice-note -->
         <!-- begin invoice-footer -->

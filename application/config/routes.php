@@ -65,9 +65,12 @@ $route['dashboard/register'] = 'register';
 // Loans
 $route['dashboard/loans'] = 'loans';
 $route['dashboard/loans/data_loans'] = 'loans/data_loans';
-$route['dashboard/loans/getCustomer'] = 'loans/getCustomer';
-$route['dashboard/loans/getProduct'] = 'loans/getProduct';
-$route['dashboard/loans/dataProduct'] = 'loans/dataProduct';
-$route['dashboard/loans/listProduct'] = 'loans/listProduct';
+$route['dashboard/loans/getEquipment'] = 'loans/getEquipment';
+$route['dashboard/loans/dataEquipment'] = 'loans/dataEquipment';
+$route['dashboard/loans/listEquipment'] = 'loans/listEquipment';
 $route['dashboard/loans/insert_loans'] = 'loans/insert_loans';
 $route['dashboard/loans/detail'] = 'loans/detail';
+
+$route['dashboard/incoming/list'] = 'incoming/list';
+$route['dashboard/incoming/approve_data'] = 'incoming/approve_data';
+$route['dashboard/incoming/rejected_data'] = 'incoming/rejected_data';

@@ -2,17 +2,17 @@
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
         <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-        <li class="breadcrumb-item active">Transaction</li>
+        <li class="breadcrumb-item active">Peminjaman Alat</li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">Transaction <small>customer...</small></h1>
+    <h1 class="page-header">Form <small>Peminjaman...</small></h1>
     <!-- end page-header -->
 
     <!-- begin panel -->
     <div class="panel panel-inverse">
         <div class="panel-heading">
-            <h4 class="panel-title">Point of Sale</h4>
+            <h4 class="panel-title">Form Peminjaman Alat</h4>
             <div class="panel-heading-btn">
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
                         class="fa fa-expand"></i></a>
@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="panel-body">
-            <form action="<?= base_url('dashboard/transaction/insert_transaction') ?>" method="POST" name="form-wizard"
+            <form action="<?= base_url('dashboard/loans/insert_loans') ?>" method="POST" name="form-wizard"
                 class="form-control-with-bg" enctype="multipart/form-data">
                 <div class="col-md-12">
                     <div class="card m-0 shadow bg-light">
@@ -47,7 +47,7 @@
                                                     <tr>
                                                         <td>No Invoice</td>
                                                         <td><strong id="strong_no_invoice"></strong>
-                                                            <input type="hidden" name="inovice">
+                                                            <input type="hidden" name="invoice_no">
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -70,7 +70,7 @@
                                     <div class="card mt-3 mb-3">
                                         <div class="card-header bg-primary text-white">
                                             <div class="card-title p-0 m-0">
-                                                <i class="fa fa-users me-2"></i>Penunjang
+                                                <i class="fa fa-users me-2"></i> Data
                                             </div>
                                         </div>
                                         <div class="card-body px-2 py-1">
@@ -86,7 +86,7 @@
                                                     <tr>
                                                         <td>Tanggal Dikembalikan</td>
                                                         <td>
-                                                            <input type="date" class="form-control" name="start_date"
+                                                            <input type="date" class="form-control" name="end_date"
                                                                 required />
                                                         </td>
                                                     </tr>
@@ -95,6 +95,30 @@
                                                         <td>
                                                             <textarea class="form-control" name="objective"
                                                                 required></textarea>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Kebutuhan</td>
+                                                        <td>
+                                                            <select class="form-control" name="needs" required>
+                                                                <option value="" selected>Choose</option>
+                                                                <?php foreach ($needs as $r) { ?>
+                                                                <option value="<?= $r->id ?>"><?= $r->name ?>
+                                                                </option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Mata Kuliah</td>
+                                                        <td>
+                                                            <select class="form-control" name="courses" required>
+                                                                <option value="" selected>Choose</option>
+                                                                <?php foreach ($courses as $r) { ?>
+                                                                <option value="<?= $r->id ?>"><?= $r->name ?>
+                                                                </option>
+                                                                <?php } ?>
+                                                            </select>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -113,37 +137,30 @@
                                             class="table table-sm table-hover table-striped table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th width="185px">Kode Barang</Oh>
-                                                    <th>Nama Barang</Oh>
-                                                    <th>Harga</th>
+                                                    <th width="185px">Kode Alat</Oh>
+                                                    <th>Nama Alat</Oh>
                                                     <th width="85x">Qty</th>
-                                                    <th>Subtotal</th>
+                                                    <th width="85x">Stock Available</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                                 <tr>
                                                     <td width="282px" colspan="2">
-                                                        <input type="hidden" name="product_id[]" id="product_id">
-                                                        <input type="text" name="product_idx[]" id="product_idx"
-                                                            class="form-control" placeholder="Kode / Nama Barang"
-                                                            autofocus value="" tabindex="1">
-                                                    </td>
-
-                                                    <td width="153px">
-                                                        <input type="text" name="price[]" id="price"
-                                                            class="form-control" placeholder="Rp(harga)"
-                                                            style="cursor: not-allowed;">
+                                                        <input type="hidden" name="equipment_id[]" id="equipment_id"
+                                                            required>
+                                                        <input type="text" name="equipment_idx[]" id="equipment_idx"
+                                                            class="form-control" placeholder="Kode / Nama Alat"
+                                                            autofocus value="" tabindex="1" required>
                                                     </td>
 
                                                     <td width="83px">
-                                                        <input type="number" name="quantity[]" id="quantity"
+                                                        <input type="number" name="qty[]" id="qty"
                                                             class="hanya-angka form-control" placeholder="Qty" min="1"
-                                                            tabindex="2">
+                                                            tabindex="2" required>
                                                     </td>
 
                                                     <td>
-                                                        <input type="text" name="amount[]" id="amount"
-                                                            class="form-control" placeholder="Rp(subtotal)"
-                                                            style="cursor: not-allowed;">
+                                                        <input type="text" id="stock" class="form-control"
+                                                            placeholder="Stock" style="cursor: not-allowed;" readonly>
                                                     </td>
 
                                                     <td width="60px">
@@ -194,7 +211,7 @@
     <!-- begin panel -->
     <div class="panel panel-inverse">
         <div class="panel-heading">
-            <h4 class="panel-title">List Transaction</h4>
+            <h4 class="panel-title">List Pengajuan Pinjaman</h4>
             <div class="panel-heading-btn">
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
                         class="fa fa-expand"></i></a>
@@ -209,17 +226,20 @@
         <div class="panel-body">
             <div class="table-responsive">
                 <div class="col-xl-12">
-                    <table id="tbl-transaction" class="table table-striped table-bordered table-td-valign-middle"
+                    <table id="tbl-loans" class="table table-striped table-bordered table-td-valign-middle"
                         width="100%">
                         <thead>
                             <tr>
-                                <th>NO</th>
-                                <th>TIMESTAMP</th>
-                                <th>INVOICE NO</th>
-                                <th>AMOUNT</th>
-                                <th>STATUS TRX</th>
-                                <th>INSTALLMENTS</th>
-                                <th>ACTION</th>
+                                <th>No</th>
+                                <th>Invoice</th>
+                                <th>Tanggal Pinjam</th>
+                                <th>Tanggal Dikembalikan</th>
+                                <th>Total Alat</th>
+                                <th>Kebutuhan</th>
+                                <th>Mata Kuliah</th>
+                                <th>Status</th>
+                                <th>Notes</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -230,17 +250,15 @@
     <!-- end panel -->
 </div>
 
-
-<!-- Manage -->
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
-
 <!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script> -->
+<!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css"> -->
+<script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
 
 <!-- jQuery UI JS -->
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
-
+<script src="<?php echo base_url('assets/js/bootstrap3-typeahead.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/app-manage.js'); ?>"></script>
 
 <script>
@@ -299,24 +317,19 @@ $(document).ready(function() {
         let dataTrx = '<tr class="rec-element" id="listbarang">' +
 
             '<td width="282px" colspan="2">' +
-            '<input type="hidden" name="product_id[]" id="product_id' + i + '">' +
-            '<select id="product_idx' + i +
-            '" name="product_idx[]" class="form-control select2bs4_daftar" style="width: 100%;" required>' +
-            '</td>' +
-
-            '<td width="153px">' +
-            '<input type="text" name="price[]" id="price' + i +
-            '" class="form-control" placeholder="Rp(harga)"  style="cursor: not-allowed;">' +
+            '<input type="hidden" name="equipment_id[]" id="equipment_id' + i + '">' +
+            '<select id="equipment_idx' + i +
+            '" name="equipment_idx[]" class="form-control select2bs4_daftar" style="width: 100%;" required>' +
             '</td>' +
 
             '<td width="83px">' +
-            '<input type="number" name="quantity[]" id="quantity' + i +
-            '" class="hanya-angka form-control" placeholder="Qty"  min="1" tabindex="2">' +
+            '<input type="number" name="qty[]" id="qty' + i +
+            '" class="hanya-angka form-control" placeholder="Qty"  min="1" tabindex="2" required>' +
             '</td>' +
 
             '<td>' +
-            '<input type="text" name="amount[]" id="amount' + i +
-            '" class="form-control" placeholder="Rp(subtotal)" style="cursor: not-allowed;">' +
+            '<input type="number" id="stock' + i +
+            '" class="hanya-angka form-control" placeholder="Stock" style="cursor: not-allowed;" readonly>' +
             '</td>' +
 
             '<td width="60px">' +
@@ -329,15 +342,15 @@ $(document).ready(function() {
 
         $('#jumlahkolom').val(i + 1);
 
-        var apa = i + 1 - 1;
+        var number = i + 1 - 1;
 
-        $('#product_idx' + apa).select2({
-            placeholder: "Pilih Product",
+        $('#equipment_idx' + number).select2({
+            placeholder: "Pilih Alat",
             theme: 'bootstrap4',
             ajax: {
                 dataType: 'json',
                 delay: 250,
-                url: '<?= base_url('admin/transaction/dataProduct'); ?>',
+                url: '<?= base_url('dashboard/loans/dataEquipment'); ?>',
                 data: function(params) {
                     return {
                         searchTerm: params.term
@@ -356,33 +369,24 @@ $(document).ready(function() {
             },
         });
 
-        $('#product_idx' + apa).change(function() {
-
-            var product = $('#product_idx' + apa).val(); //ambil value id dari provinsi
-
+        $('#equipment_idx' + number).change(function() {
+            var equipment = $('#equipment_idx' + number).val(); //ambil value id dari provinsi
             $.ajax({
-                url: '<?= base_url(); ?>admin/transaction/listProduct',
+                url: '<?= base_url(); ?>dashboard/loans/listEquipment',
                 method: 'POST',
                 data: {
-                    searchTerm: product
+                    searchTerm: equipment
                 },
                 success: function(data) {
                     const obj = JSON.parse(data)
-                    console.log(obj.id);
-                    jQuery("#product_id" + apa).val(obj.product_id);
-                    jQuery("#price" + apa).val(obj.price);
-                    jQuery("#quantity" + apa).val(1);
-                    jQuery("#amount" + apa).val(1 * obj.price);
+                    jQuery("#equipment_id" + number).val(obj.equipment_id);
+                    jQuery("#qty" + number).val(1);
+                    jQuery("#stock" + number).val(obj.qty);
 
                 }
             });
-
-            $('#quantity' + apa).on('keyup change', function() {
-                $('#amount' + apa).val(parseInt($('#quantity' + apa).val()) * parseInt(
-                    $('#price' + apa).val()))
-            })
-
         });
+
         i++;
     });
 
@@ -397,33 +401,21 @@ $(document).ready(function() {
 </script>
 
 <script>
-$(function() {
-    $(document).on("click", "#submit", function(e) {
-        var leads = $('#field-autocomplete').val();
-        if (leads == null || leads == "") {
-            alert("Silahkan pilih Customer");
-            return false;
-        }
-    });
-});
-
 // autocomplete functionality
-if (jQuery('input#leads_idx').length > 0) {
-    jQuery('input#leads_idx').typeahead({
+if (jQuery('input#equipment_idx').length > 0) {
+    jQuery('input#equipment_idx').typeahead({
         displayText: function(item) {
-            return item.name + ' | ' + item.identity_card
+            return item.code + ' | ' + item.name
         },
         afterSelect: function(item) {
             this.$element[0].value = item.name;
-            jQuery("input#field-autocomplete").val(item.id);
-            jQuery("input#leads_id").val(item.id);
-            jQuery("#delivery_address").val(item.business_address);
-            jQuery("#delivery_latitude").val(item.delivery_latitude);
-            jQuery("#delivery_longitude").val(item.delivery_longitude);
+            jQuery("#equipment_id").val(item.id);
+            jQuery("#stock").val(item.qty);
+            jQuery("#qty").val(1);
         },
         source: function(query, process) {
             jQuery.ajax({
-                url: "<?php echo base_url('admin/transaction/getCustomer'); ?>",
+                url: "<?php echo base_url('dashboard/loans/getEquipment'); ?>",
                 data: {
                     query: query.toUpperCase()
                 },
@@ -435,37 +427,5 @@ if (jQuery('input#leads_idx').length > 0) {
             })
         }
     });
-}
-
-if (jQuery('input#product_idx').length > 0) {
-    jQuery('input#product_idx').typeahead({
-        displayText: function(item) {
-            return item.sku + ' | ' + item.name
-        },
-        afterSelect: function(item) {
-            this.$element[0].value = item.name;
-            jQuery("#product_id").val(item.id);
-            jQuery("#price").val(item.price);
-            jQuery("#quantity").val(1);
-            jQuery("#amount").val(1 * item.price);
-        },
-        source: function(query, process) {
-            jQuery.ajax({
-                url: "<?php echo base_url('admin/transaction/getProduct'); ?>",
-                data: {
-                    query: query.toUpperCase()
-                },
-                dataType: "json",
-                type: "POST",
-                success: function(data) {
-                    process(data)
-                }
-            })
-        }
-    });
-
-    $('#quantity').on('keyup change', function() {
-        $('#amount').val(parseInt($('#quantity').val()) * parseInt($('#price').val()))
-    })
 }
 </script>

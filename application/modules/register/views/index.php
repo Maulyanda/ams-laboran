@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <title><?= $info[0]->title ?> - <?= $info[0]->name ?></title>
+    <link rel="icon" href="<?= base_url($info[0]->favicon_logo); ?>">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />

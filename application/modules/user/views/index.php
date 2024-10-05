@@ -62,14 +62,241 @@
                                     <td>
                                         <?php if ($data->is_active != 1 and $data->status == 'pending') { ?>
                                         <button type="button" class="btn btn-success" data-toggle="modal"
-                                            data-target="#modal_approved" data-id="<?= $data->user_id ?>">
+                                            data-target="#modal_approved<?= $data->user_id ?>">
                                             <i class="fa fa-check"></i>
                                         </button>
+                                        <div id="modal_approved<?= $data->user_id ?>" class="modal fade" tabindex="-1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-md">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Approve user</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-hidden="true">&times;</button>
+                                                    </div>
+
+                                                    <form action="<?= base_url() ?>user/approve_or_reject_user"
+                                                        method="post">
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <input type="hidden" id="id" name="id"
+                                                                        value="<?= $data->user_id ?>">
+                                                                    <input type="hidden" name="status" value="approved">
+
+                                                                    <div class="col-sm-6">
+                                                                        <label><?php echo $lang_first_name; ?></label>
+                                                                        <input type="text" class="form-control"
+                                                                            value="<?= $data->first_name ?>" disabled>
+                                                                    </div>
+
+                                                                    <div class="col-sm-6">
+                                                                        <label><?php echo $lang_last_name; ?></label>
+                                                                        <input type="text" class="form-control"
+                                                                            value="<?= $data->last_name ?>" disabled>
+                                                                    </div>
+
+                                                                    <div class="col-sm-6">
+                                                                        <label><?php echo $lang_username; ?></label>
+                                                                        <input type="text" class="form-control"
+                                                                            value="<?= $data->username ?>" disabled>
+                                                                    </div>
+
+                                                                    <div class="col-sm-6">
+                                                                        <label><?php echo $lang_email; ?></label>
+                                                                        <input type="email" class="form-control"
+                                                                            value="<?= $data->email ?>" disabled>
+                                                                    </div>
+                                                                    <br>
+                                                                    <div class="col-sm-12">
+                                                                        <br>
+                                                                        <label>File Identitas</label>
+                                                                        <img class="rounded mx-auto d-block"
+                                                                            src="<?= base_url('assets/upload/' . $data->identity_card) ?>"
+                                                                            width="50%" alt="" />
+                                                                    </div>
+                                                                    <br>
+                                                                    <div class="col-sm-12">
+                                                                        <label><?php echo $lang_level; ?></label>
+                                                                        <select name="user_level" class="form-control"
+                                                                            required autocomplete="off" required>
+                                                                            <option value="">
+                                                                                <?php echo $lang_choose_level; ?>
+                                                                            </option>
+                                                                            <?php foreach ($getrole_data as $r) { ?>
+                                                                            <option value="<?= $r->idroles ?>">
+                                                                                <?= $r->roles_name ?></option>
+                                                                            <?php } ?>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-link"
+                                                                aria-hidden="true"
+                                                                data-dismiss="modal"><?php echo $lang_close; ?></button>
+                                                            <button type="submit"
+                                                                class="btn bg-success">Approve</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <button type="button" class="btn btn-danger" data-toggle="modal"
-                                            data-target="#modal_rejected" data-id="<?= $data->user_id ?>">
-                                            <i class="fa fa-times"></i>
+                                            data-target="#modal_rejected<?= $data->user_id ?>">
+                                            <i class=" fa fa-times"></i>
                                         </button>
-                                        <?php } else { ?>
+                                        <div id="modal_rejected<?= $data->user_id ?>" class="modal fade" tabindex="-1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-md">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Rejected user</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-hidden="true">&times;</button>
+                                                    </div>
+
+                                                    <form action="<?= base_url() ?>user/approve_or_reject_user"
+                                                        method="post">
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <input type="hidden" id="id" name="id"
+                                                                        value="<?= $data->user_id ?>">
+                                                                    <input type="hidden" name="status" value="rejected">
+
+                                                                    <div class="col-sm-6">
+                                                                        <label><?php echo $lang_first_name; ?></label>
+                                                                        <input type="text" class="form-control"
+                                                                            value="<?= $data->first_name ?>" disabled>
+                                                                    </div>
+
+                                                                    <div class="col-sm-6">
+                                                                        <label><?php echo $lang_last_name; ?></label>
+                                                                        <input type="text" class="form-control"
+                                                                            value="<?= $data->last_name ?>" disabled>
+                                                                    </div>
+
+                                                                    <div class="col-sm-6">
+                                                                        <label><?php echo $lang_username; ?></label>
+                                                                        <input type="text" class="form-control"
+                                                                            value="<?= $data->username ?>" disabled>
+                                                                    </div>
+
+                                                                    <div class="col-sm-6">
+                                                                        <label><?php echo $lang_email; ?></label>
+                                                                        <input type="email" class="form-control"
+                                                                            value="<?= $data->email ?>" disabled>
+                                                                    </div>
+                                                                    <br>
+                                                                    <div class="col-sm-12">
+                                                                        <br>
+                                                                        <label>File Identitas</label>
+                                                                        <img class="rounded mx-auto d-block"
+                                                                            src="<?= base_url('assets/upload/' . $data->identity_card) ?>"
+                                                                            width="50%" alt="" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-link"
+                                                                aria-hidden="true"
+                                                                data-dismiss="modal"><?php echo $lang_close; ?></button>
+                                                            <button type="submit"
+                                                                class="btn bg-danger">Rejected</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php } elseif ($data->status == 'rejected') { ?>
+                                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                            data-target="#modal_approved<?= $data->user_id ?>">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                        <div id="modal_approved<?= $data->user_id ?>" class="modal fade" tabindex="-1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-md">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Approve user</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-hidden="true">&times;</button>
+                                                    </div>
+
+                                                    <form action="<?= base_url() ?>user/approve_or_reject_user"
+                                                        method="post">
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <input type="hidden" id="id" name="id"
+                                                                        value="<?= $data->user_id ?>">
+                                                                    <input type="hidden" name="status" value="approved">
+
+                                                                    <div class="col-sm-6">
+                                                                        <label><?php echo $lang_first_name; ?></label>
+                                                                        <input type="text" class="form-control"
+                                                                            value="<?= $data->first_name ?>" disabled>
+                                                                    </div>
+
+                                                                    <div class="col-sm-6">
+                                                                        <label><?php echo $lang_last_name; ?></label>
+                                                                        <input type="text" class="form-control"
+                                                                            value="<?= $data->last_name ?>" disabled>
+                                                                    </div>
+
+                                                                    <div class="col-sm-6">
+                                                                        <label><?php echo $lang_username; ?></label>
+                                                                        <input type="text" class="form-control"
+                                                                            value="<?= $data->username ?>" disabled>
+                                                                    </div>
+
+                                                                    <div class="col-sm-6">
+                                                                        <label><?php echo $lang_email; ?></label>
+                                                                        <input type="email" class="form-control"
+                                                                            value="<?= $data->email ?>" disabled>
+                                                                    </div>
+                                                                    <br>
+                                                                    <div class="col-sm-12">
+                                                                        <br>
+                                                                        <label>File Identitas</label>
+                                                                        <img class="rounded mx-auto d-block"
+                                                                            src="<?= base_url('assets/upload/' . $data->identity_card) ?>"
+                                                                            width="50%" alt="" />
+                                                                    </div>
+                                                                    <br>
+                                                                    <div class="col-sm-12">
+                                                                        <label><?php echo $lang_level; ?></label>
+                                                                        <select name="user_level" class="form-control"
+                                                                            required autocomplete="off" required>
+                                                                            <option value="">
+                                                                                <?php echo $lang_choose_level; ?>
+                                                                            </option>
+                                                                            <?php foreach ($getrole_data as $r) { ?>
+                                                                            <option value="<?= $r->idroles ?>">
+                                                                                <?= $r->roles_name ?></option>
+                                                                            <?php } ?>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-link"
+                                                                aria-hidden="true"
+                                                                data-dismiss="modal"><?php echo $lang_close; ?></button>
+                                                            <button type="submit"
+                                                                class="btn bg-success">Approve</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <?php } ?>
 
                                         <?php if ($data->roles_name != 'Superadmin' and $data->status == 'approved') { ?>
@@ -198,89 +425,11 @@
             </div>
         </div>
     </div>
-
-    <div id="modal_approved" class="modal fade" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"><?php echo $lang_delete_user; ?></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-
-                <form action="<?= base_url() ?>user/approve_or_reject_user" method="post">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <div class="row">
-                                <input type="hidden" id="id" name="id">
-                                <input type="hidden" name="status" value="approved">
-                                <div class="col">
-                                    <p>Apakah Anda yakin mau approve user?</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link" aria-hidden="true"
-                            data-dismiss="modal"><?php echo $lang_close; ?></button>
-                        <button type="submit" class="btn bg-success">Approve</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div id="modal_rejected" class="modal fade" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"><?php echo $lang_delete_user; ?></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-
-                <form action="<?= base_url() ?>user/approve_or_reject_user" method="post">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <div class="row">
-                                <input type="hidden" id="id" name="id">
-                                <input type="hidden" name="status" value="rejected">
-                                <div class="col">
-                                    <p>Apakah Anda yakin mau rejected user?</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link" aria-hidden="true"
-                            data-dismiss="modal"><?php echo $lang_close; ?></button>
-                        <button type="submit" class="btn bg-danger">Rejected</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 </div>
 <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
 <script>
 $(document).ready(function() {
     $('#modal_delete').on('show.bs.modal', function(event) {
-            var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
-            var modal = $(this) // Isi nilai pada field
-            modal.find('#id').attr("value", div.data('id'));
-        }
-
-    );
-
-    $('#modal_approved').on('show.bs.modal', function(event) {
-            var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
-            var modal = $(this) // Isi nilai pada field
-            modal.find('#id').attr("value", div.data('id'));
-        }
-
-    );
-
-    $('#modal_rejected').on('show.bs.modal', function(event) {
             var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
             var modal = $(this) // Isi nilai pada field
             modal.find('#id').attr("value", div.data('id'));

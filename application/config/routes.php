@@ -60,6 +60,7 @@ $route['dashboard'] = 'home';
 $route['dashboard/login'] = 'login';
 $route['dashboard/logout'] = 'login/logout';
 $route['dashboard/home'] = 'home';
+$route['dashboard/register'] = 'register';
 
 // Loans
 $route['dashboard/loans'] = 'loans';

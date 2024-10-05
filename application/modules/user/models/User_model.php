@@ -5,7 +5,7 @@ class User_model extends CI_Model
     {
         return $this->db->select('us.*, ro.roles_name')
             ->from('users as us')
-            ->join('roles as ro', 'us.users_level = ro.idroles')
+            ->join('roles as ro', 'us.users_level = ro.idroles', 'left')
             ->get()->result();
     }
 

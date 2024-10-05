@@ -1,516 +1,162 @@
-<section class="page-section m-5" id="register">
-    <div class="container">
-        <div class="text-center">
-            <h4 class="monst">Register</h4>
-            <p class="section-subheading text-muted">Data Customer</p>
-        </div>
-        <div class="row text-center">
-            <form action="<?= base_url('register/leds') ?>" method="POST" name="form-wizard"
-                class="form-control-with-bg" enctype="multipart/form-data">
-                <!-- begin wizard -->
-                <div id="wizard">
-                    <!-- begin wizard-step -->
-                    <ul>
-                        <li>
-                            <a href="#step-1">
-                                <span class="number">1</span>
-                                <span class="info">
-                                    Data Diri
-                                    <small></small>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#step-2">
-                                <span class="number">2</span>
-                                <span class="info">
-                                    Upload Dokumen
-                                    <small></small>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#step-3">
-                                <span class="number">3</span>
-                                <span class="info">
-                                    Lokasi Usaha
-                                    <small></small>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#step-4">
-                                <span class="number">4</span>
-                                <span class="info">
-                                    Simpan
-                                    <small></small>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- end wizard-step -->
-                    <!-- begin wizard-content -->
-                    <div>
-                        <!-- begin step-1 -->
-                        <div id="step-1">
-                            <!-- begin fieldset -->
-                            <fieldset>
-                                <!-- begin row -->
-                                <div class="row">
-                                    <!-- begin col-8 -->
-                                    <div class="col-xl-8 offset-xl-2">
-                                        <legend class="no-border f-w-700 p-b-0 m-t-0 m-b-20 f-s-16 text-inverse">
-                                            Personal info</legend>
+<!DOCTYPE html>
+<html lang="en">
 
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">Nama<span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <input type="text" name="name" pattern="[A-Z a-z]{3,50}"
-                                                    placeholder="Nama Sesuai KTP" data-parsley-group="step-1"
-                                                    data-parsley-required="true" class="form-control"
-                                                    value="<?= $this->input->get('name') ?>" />
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
+<head>
+    <meta charset="utf-8" />
+    <title><?= $info[0]->title ?> - <?= $info[0]->name ?></title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
 
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">Email <span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <input type="email" name="email" placeholder="Email"
-                                                    data-parsley-group="step-1" data-parsley-required="true"
-                                                    class="form-control" />
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/default/app.min.css'); ?>">
+    <!-- ================== END BASE CSS STYLE ================== -->
+</head>
 
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">Nomor Handphone <span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <input type="tel" pattern="^628[0-9]{8,}$" name="phone"
-                                                    placeholder="628xxxxxxxxx" data-parsley-group="step-1"
-                                                    data-parsley-required="true" data-parsley-type="number"
-                                                    class="form-control" value="<?= $this->input->get('phone') ?>" />
-                                                <span style="font-size: 12px;">Note: 628xxxxxxxxx (Terdiri dari panjang
-                                                    minimal 10 dan selalu dimulai dengan 628)</span>
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
+<body class="pace-top">
+    <!-- begin #page-loader -->
+    <div id="page-loader" class="fade show"><span class="spinner"></span></div>
+    <!-- end #page-loader -->
 
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">No Induk KTP <span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <input type="text" pattern="^[0-9]{16,}$" name="identity_card"
-                                                    placeholder="No Induk KTP" data-parsley-group="step-1"
-                                                    data-parsley-required="true" data-parsley-type="number"
-                                                    class="form-control" />
-                                                <span style="font-size: 12px;">Nomor KTP 16 Digit.</span>
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">No Induk KK <span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <input type="text" pattern="^[0-9]{16,}$" name="family_card"
-                                                    placeholder="No Induk KK" data-parsley-group="step-1"
-                                                    data-parsley-required="true" data-parsley-type="number"
-                                                    class="form-control" />
-                                                <span style="font-size: 12px;">Nomor KK 16 Digit.</span>
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">Apakah anda pernah
-                                                mengajukan pinjaman? <span class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <select class="form-control" name="loan" searchable="Search here.."
-                                                    data-parsley-group="step-1" data-parsley-required="true">
-                                                    <option value="" disabled selected>Choose your status</option>
-                                                    <option value="Ya : sudah selesai dan mengalami kredit macet">Ya :
-                                                        sudah selesai dan mengalami kredit macet</option>
-                                                    <option value="Ya : sudah selesai dan lancar">Ya : sudah selesai dan
-                                                        lancar</option>
-                                                    <option value="Ya : sedang berjalan dan mengalami kredit macet">Ya :
-                                                        sedang berjalan dan pernah mengalami kredit macet</option>
-                                                    <option value="Ya : sedang berjalan dan tidak pernah macet">Ya :
-                                                        sedang berjalan dan tidak pernah macet</option>
-                                                    <option value="Tidak">Tidak</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">Alamat Rumah<span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <textarea name="home_address" placeholder="Alamat Lengkap Rumah"
-                                                    data-parsley-group="step-1" data-parsley-required="true"
-                                                    class="form-control" rows="4" cols="50"></textarea>
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">RT<span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <input type="text" pattern="^[0-9]{3,}$" name="home_rt" placeholder="RT"
-                                                    data-parsley-group="step-1" data-parsley-required="true"
-                                                    data-parsley-type="number" class="form-control" />
-                                                <span style="font-size: 12px;">Nomor RT 3 Digit.</span>
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">RW<span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <input type="text" pattern="^[0-9]{3,}$" name="home_rw" placeholder="RW"
-                                                    data-parsley-group="step-1" data-parsley-required="true"
-                                                    data-parsley-type="number" class="form-control" />
-                                                <span style="font-size: 12px;">Nomor RW 3 Digit.</span>
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">No. Rumah<span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <input type="text" name="home_no" placeholder="Nomor Rumah"
-                                                    data-parsley-group="step-1" data-parsley-required="true"
-                                                    class="form-control" />
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-                                    </div>
-                                    <!-- end col-8 -->
-                                </div>
-                                <!-- end row -->
-                            </fieldset>
-                            <!-- end fieldset -->
-                        </div>
-                        <!-- end step-1 -->
-
-                        <!-- begin step-2 -->
-                        <div id="step-2">
-                            <!-- begin fieldset -->
-                            <fieldset>
-                                <!-- begin row -->
-                                <div class="row">
-                                    <!-- begin col-8 -->
-                                    <div class="col-xl-8 offset-xl-2">
-                                        <legend class="no-border f-w-700 p-b-0 m-t-0 m-b-20 f-s-16 text-inverse">Upload
-                                            Dokumen Anda</legend>
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">Upload Foto KTP Anda
-                                                <span class="text-danger">Asli *</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <input type="file" name="file_identity_card"
-                                                    accept="image/png, image/jpg, image/jpeg" ata-parsley-group="step-2"
-                                                    data-parsley-required="true" class="form-control" />
-                                                <span style="font-size: 12px;">Note : Ukuran Foto KTP max.
-                                                    2000kb.</span>
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">Upload Foto KK Anda
-                                                <span class="text-danger">Asli *</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <input type="file" name="file_family_card"
-                                                    accept="image/png, image/jpg, image/jpeg" ata-parsley-group="step-2"
-                                                    data-parsley-required="true" class="form-control" />
-                                                <span style="font-size: 12px;">Note : Ukuran Foto KK max. 2000kb.</span>
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-                                    </div>
-                                    <!-- end col-8 -->
-                                </div>
-                                <!-- end row -->
-                            </fieldset>
-                            <!-- end fieldset -->
-                        </div>
-                        <!-- end step-2 -->
-
-                        <!-- begin step-3 -->
-                        <div id="step-3">
-                            <!-- begin fieldset -->
-                            <fieldset>
-                                <!-- begin row -->
-                                <div class="row">
-                                    <!-- begin col-8 -->
-                                    <div class="col-xl-8 offset-xl-2">
-                                        <legend class="no-border f-w-700 p-b-0 m-t-0 m-b-20 f-s-16 text-inverse">Lokasi
-                                            Usaha Anda</legend>
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">Alamat Usaha<span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <textarea name="business_address" placeholder="Alamat Lengkap Rumah"
-                                                    data-parsley-group="step-3" data-parsley-required="true"
-                                                    class="form-control" rows="4" cols="50"></textarea>
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">RT Usaha<span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <input type="text" pattern="^[0-9]{3,}$" name="business_rt"
-                                                    placeholder="RT" data-parsley-group="step-3"
-                                                    data-parsley-required="true" data-parsley-type="number"
-                                                    class="form-control" />
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">RW Usaha<span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <input type="text" pattern="^[0-9]{3,}$" name="business_rw"
-                                                    placeholder="RW" data-parsley-group="step-3"
-                                                    data-parsley-required="true" data-parsley-type="number"
-                                                    class="form-control" />
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">No. Rumah Usaha<span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <input type="text" name="business_no" placeholder="Nomor Rumah Usaha"
-                                                    data-parsley-group="step-3" data-parsley-required="true"
-                                                    class="form-control" />
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">Provinsi <span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <select name="province" id="province" class="form-control"
-                                                    data-parsley-group="step-3" data-parsley-required="true">
-                                                    <option value="">Pilih Provinsi</option>
-                                                    <?php
-													foreach ($provinsi as $row) {
-														echo '<option value="' . $row->id . '">' . $row->name . '</option>';
-													}
-													?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">Kabupaten/Kota <span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <select name="regency" id="regency" class="form-control"
-                                                    data-parsley-group="step-3" data-parsley-required="true">
-                                                    <option value="">Pilih Kabupaten</option>
-                                                    <?php
-
-													?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">Kecamatan <span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <select name="district" id="district" class="form-control"
-                                                    data-parsley-group="step-3" data-parsley-required="true">
-                                                    <option value="">Pilih Kecamatan</option>
-                                                    <?php
-
-													?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">Kodepos <span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <input type="text" pattern="^[0-9]{5,}$" name="postal_code"
-                                                    placeholder="postal_code" data-parsley-group="step-3"
-                                                    data-parsley-required="true" data-parsley-type="number"
-                                                    class="form-control" />
-                                                <span style="font-size: 12px;">Kode Pos 5 Digit.</span>
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">Upload tampak depan
-                                                toko <span class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <input type="file" name="file_store"
-                                                    accept="image/png, image/jpg, image/jpeg" ata-parsley-group="step-3"
-                                                    data-parsley-required="true" class="form-control" />
-                                                <span style="font-size: 12px;">Note : Ukuran Foto max. 2000kb.</span>
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-lg-3 text-lg-right col-form-label">Kode Referral <span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-lg-9 col-xl-6">
-                                                <select name="referral_code" id="referral_code" class="form-control"
-                                                    data-parsley-group="step-3" data-parsley-required="true">
-                                                    <option value="">Pilih Referral</option>
-                                                    <option value="INSTAGRAM">INSTAGRAM</option>
-                                                    <option value="YOUTUBE">YOUTUBE</option>
-                                                    <option value="FACEBOOK">FACEBOOK</option>
-                                                    <option value="GOOGLE">GOOGLE</option>
-                                                    <option value="WHATSAPP">WHATSAPP</option>
-                                                    <option value="TEMAN/KERABAT">TEMAN/KERABAT</option>
-                                                    <option value="KOMUNITAS">KOMUNITAS</option>
-                                                    <option value="AMEN">AMEN</option>
-                                                    <option value="PHRI">PHRI</option>
-                                                    <option value="LAINNYA">LAINNYA</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-                                        <div class="initial">
-                                            <div class="form-group row m-b-10">
-                                                <label class="col-lg-3 text-lg-right col-form-label">Kode Referral
-                                                    Lainnya<span class="text-danger">*</span></label>
-                                                <div class="col-lg-9 col-xl-6">
-                                                    <input type="text" name="referral_code2"
-                                                        placeholder="Kode Referral Lainnya" data-parsley-group="step-3"
-                                                        class="form-control" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end col-8 -->
-                                </div>
-                                <!-- end row -->
-                            </fieldset>
-                            <!-- end fieldset -->
-                        </div>
-                        <!-- end step-3 -->
-
-                        <!-- begin step-4 -->
-                        <div id="step-4">
-                            <div class="jumbotron m-b-0 text-center">
-                                <h2 class="display-4">Apakah Anda Yakin Dengan Data Anda ?</h2>
-                                <p class="lead mb-4">Jika sudah Yakin, Klik button Simpan di bawah ini.</p>
-                                <p>
-                                <div class="form-check">
-
-                                    <label class="form-check-label" for="term_condition">
-                                        <input class="form-check-input" type="checkbox" value="1" name="term_condition"
-                                            id="term_condition" required>
-                                        I agree to the
-                                        <a href="javascript:;" data-toggle="modal" data-target="#termsconditions"
-                                            style="color: blue">
-                                            terms dan conditions
-                                        </a>
-                                    </label>
-                                </div>
-                                </p>
-                                <p><button type="submit" class="btn btn-primary btn-lg">Simpan</button></p>
+    <!-- begin #page-container -->
+    <div id="page-container" class="fade">
+        <!-- begin register -->
+        <div class="register register-with-news-feed">
+            <!-- begin news-feed -->
+            <div class="news-feed">
+                <div class="news-image"
+                    style="background-image: url(<?php echo base_url('assets/img/login-bg/login-bg-1.jpg'); ?>)"></div>
+                <div class="news-caption">
+                    <h4 class="caption-title"><?= $info[0]->title ?></h4>
+                    <p>
+                        <?= $info[0]->desc ?>
+                    </p>
+                </div>
+            </div>
+            <!-- end news-feed -->
+            <!-- begin right-content -->
+            <div class="right-content">
+                <!-- begin register-header -->
+                <h1 class="register-header">
+                    Sign Up
+                    <small>Create your account.</small>
+                </h1>
+                <!-- end register-header -->
+                <!-- begin register-content -->
+                <div class="register-content">
+                    <form action="<?= base_url('register/insert_data'); ?>" method="POST" class="margin-bottom-0"
+                        enctype="multipart/form-data">
+                        <label class="control-label">Name <span class="text-danger">*</span></label>
+                        <div class="row row-space-10">
+                            <div class="col-md-6 m-b-15">
+                                <input type="text" class="form-control" name="first_name" placeholder="First name"
+                                    required />
+                            </div>
+                            <div class="col-md-6 m-b-15">
+                                <input type="text" class="form-control" name="last_name" placeholder="Last name"
+                                    required />
                             </div>
                         </div>
-                        <!-- end step-4 -->
-                    </div>
-                    <!-- end wizard-content -->
+                        <label class="control-label">NIP/NPM <span class="text-danger">*</span></label>
+                        <div class="row m-b-15">
+                            <div class="col-md-12">
+                                <input type="number" class="form-control" name="username" placeholder="Nip/Npm"
+                                    required />
+                            </div>
+                        </div>
+                        <label class="control-label">Email <span class="text-danger">*</span></label>
+                        <div class="row m-b-15">
+                            <div class="col-md-12">
+                                <input type="email" class="form-control" name="email" placeholder="Email address"
+                                    required />
+                            </div>
+                        </div>
+                        <label class="control-label">Identity card <span class="text-danger">*</span></label>
+                        <div class="row m-b-15">
+                            <div class="col-md-12">
+                                <input type="file" class="form-control" name="identity_card"
+                                    accept="image/png, image/jpg, image/jpeg" required />
+                            </div>
+                        </div>
+                        <label class="control-label">Password <span class="text-danger">*</span></label>
+                        <div class="row m-b-15">
+                            <div class="col-md-12">
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Password" data-toggle="password" required />
+                            </div>
+                        </div>
+                        <label class="control-label">Password Konfirmasi <span class="text-danger">*</span></label>
+                        <div class="row m-b-15">
+                            <div class="col-md-12">
+                                <input type="password" class="form-control" id="konfirmasi_password"
+                                    placeholder="Password" data-toggle="password" required />
+                            </div>
+                        </div>
+                        <div class="checkbox checkbox-css m-b-30">
+                            <div class="checkbox checkbox-css m-b-30">
+                                <input type="checkbox" id="agreement_checkbox" value="">
+                                <label for="agreement_checkbox">
+                                    By clicking Sign Up, you agree to our <a href="javascript:;">Terms</a> and that you
+                                    have read our <a href="javascript:;">Data Policy</a>, including our <a
+                                        href="javascript:;">Cookie Use</a>.
+                                </label>
+                            </div>
+                        </div>
+                        <div class="register-buttons">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>
+                        </div>
+                        <div class="m-t-30 m-b-30 p-b-30">
+                            Already a member? Click <a href="<?= base_url('dashboard/login') ?>">here</a> to login.
+                        </div>
+                        <hr />
+                        <p class="text-center mb-0">
+                            &copy; <?= $info[0]->name ?> All Right Reserved <?= date('Y') ?>
+                        </p>
+                    </form>
                 </div>
-                <!-- end wizard -->
-            </form>
+                <!-- end register-content -->
+            </div>
+            <!-- end right-content -->
         </div>
+        <!-- end register -->
     </div>
-</section>
+</body>
 
-<script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
-<script>
-function validateform() {
-    var email = $('#txt_emailID').val();
-    if (email == null || email == "") {
-        alert("Email Should Be Complusory");
-        return false;
-    }
+<script src="<?php echo base_url('assets/js/app.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/theme/default.min.js'); ?>"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-show-password/1.0.3/bootstrap-show-password.min.js"></script>
+
+<script type="text/javascript">
+$("#password").password('toggle');
+</script>
+
+
+<script type="text/javascript">
+window.onload = function() {
+    document.getElementById("password").onchange = validatePassword;
+    document.getElementById("konfirmasi_password").onchange = validatePassword;
 }
 
-$(document).ready(function() {
+function validatePassword() {
+    var pass2 = document.getElementById("konfirmasi_password").value;
+    var pass1 = document.getElementById("password").value;
+    console.log(pass2);
+    console.log(pass1);
+    console.log(pass1 == pass2);
 
-    //request data kabupaten
-    $('#province').change(function() {
-        var provinsi_id = $('#province').val(); //ambil value id dari provinsi
+    if (pass1.length >= 6)
+        document.getElementById("password").setCustomValidity('');
+    else
+        document.getElementById("password").setCustomValidity("Password Kurang dari 6 character");
 
-        if (provinsi_id != '') {
-            $.ajax({
-                url: '<?= base_url(); ?>register/get_kabupaten',
-                method: 'POST',
-                data: {
-                    provinsi_id: provinsi_id
-                },
-                success: function(data) {
-                    $('#regency').html(data)
-                }
-            });
-        }
-    });
 
-    //request data kecamatan
-    $('#regency').change(function() {
-        var kabupaten_id = $('#regency').val(); // ambil value id dari kabupaten
-        if (kabupaten_id != '') {
-            $.ajax({
-                url: '<?= base_url(); ?>register/get_kecamatan',
-                method: 'POST',
-                data: {
-                    kabupaten_id: kabupaten_id
-                },
-                success: function(data) {
-                    $('#district').html(data)
-                }
-            });
-        }
-    });
-});
-
-$('#referral_code').on('change', function() {
-    if (this.value == 'LAINNYA') {
-        $('.initial').show();
-    } else {
-        $(".initial").hide();
-    }
-});
-
-$(".initial").hide();
+    if (pass1 != pass2)
+        document.getElementById("konfirmasi_password").setCustomValidity("Password Tidak Sama, Coba Lagi");
+    else
+        document.getElementById("konfirmasi_password").setCustomValidity('');
+}
 </script>
+
+</html>

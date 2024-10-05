@@ -41,22 +41,32 @@ class Login_model extends CI_Model
             $result = $this->db->get('users')->result();
 
             if (!empty($result)) {
-                $this->session->set_userdata('id', $data_user->user_id);
-                $this->session->set_userdata('first_name', $data_user->first_name);
-                $this->session->set_userdata('last_name', $data_user->last_name);
-                $this->session->set_userdata('username', $data_user->username);
-                $this->session->set_userdata('email', $data_user->email);
-                $this->session->set_userdata('profile_picture', $data_user->profile_picture);
-                $this->session->set_userdata('users_level', $data_user->users_level);
-                $this->session->set_userdata('is_login', TRUE);
+                if ($result[0]->status != 'pending') {
+                    if ($result[0]->status != 'rejected') {
+                        $this->session->set_userdata('id', $data_user->user_id);
+                        $this->session->set_userdata('first_name', $data_user->first_name);
+                        $this->session->set_userdata('last_name', $data_user->last_name);
+                        $this->session->set_userdata('username', $data_user->username);
+                        $this->session->set_userdata('email', $data_user->email);
+                        $this->session->set_userdata('profile_picture', $data_user->profile_picture);
+                        $this->session->set_userdata('users_level', $data_user->users_level);
+                        $this->session->set_userdata('is_login', TRUE);
 
-                $info = $this->db->get('informations')->result()[0];
-                $this->session->set_userdata('apps_name', $info->name);
-                $this->session->set_userdata('apps_title', $info->title);
-                $this->session->set_userdata('apps_favicon', $info->favicon_logo);
+                        $info = $this->db->get('informations')->result()[0];
+                        $this->session->set_userdata('apps_name', $info->name);
+                        $this->session->set_userdata('apps_title', $info->title);
+                        $this->session->set_userdata('apps_favicon', $info->favicon_logo);
 
-                $this->session->set_flashdata('success', 'Selamat datang di aplikasi ' . $info->title);
-                return TRUE;
+                        $this->session->set_flashdata('success', 'Selamat datang di aplikasi ' . $info->title);
+                        return TRUE;
+                    } else {
+                        $this->session->set_flashdata('success', 'Account anda di reject, silahkan hubungi pihak laboran.');
+                        return FALSE;
+                    }
+                } else {
+                    $this->session->set_flashdata('success', 'Account anda belum di approve, silahkan menunggu.');
+                    return FALSE;
+                }
             } else {
                 $this->session->set_flashdata('success', 'Password Anda Salah!!!');
                 return FALSE;

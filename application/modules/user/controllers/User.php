@@ -94,6 +94,7 @@ class User extends CI_Controller
         if ($this->input->post('status', TRUE) == 'approved') {
             $data = array(
                 'is_active' => '1',
+                'users_level' => $this->input->post('user_level', TRUE),
                 'status' => $this->input->post('status', TRUE)
             );
         } else {

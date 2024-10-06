@@ -71,11 +71,10 @@ class Process extends CI_Controller
 
         $data_loans = $this->Process_model->getDatabyWhere($id);
 
-        $end_date_loans = $data_loans[0]->end_date;
-        $current_date = date('Y-m-d');
-        $diff = date_diff(date_create($end_date_loans), date_create($current_date));
+        $end_date_loans = date_create($data_loans[0]->end_date);
+        $current_date = date_create(date('Y-m-d'));
 
-        if ($diff->days > 0) {
+        if ($current_date > $end_date_loans) {
             // Proses Telat Pengembalian
             $loans['status'] = 'late';
             $loans['notes'] = $this->input->post('notes', TRUE);
@@ -107,6 +106,18 @@ class Process extends CI_Controller
             $this->Process_model->insertData('loans_history', $history);
 
             $this->session->set_flashdata('success', 'Alat yang dikembalikan sesuai dengan waktunya');
+        }
+
+        $detail_loans = $this->Process_model->detail_loans($id);
+        // Tambah Stock
+        foreach ($detail_loans as $data) {
+            $equipment = $this->Process_model->getEquipment($data->equipment_id);
+            $equipment_id = $data->equipment_id;
+            $sisa = $equipment->qty + $data->qty;
+            $data = array(
+                'qty' => $sisa
+            );
+            $this->Process_model->updateData('equipment', $equipment_id, $data);
         }
 
         redirect('dashboard/process/list');

@@ -32,6 +32,7 @@
                                     <th>Invoice</th>
                                     <th>Tanggal Pinjam</th>
                                     <th>Tanggal Pengembalian</th>
+                                    <th>Tenggat Waktu</th>
                                     <th>Total Alat</th>
                                     <th>Kebutuhan</th>
                                     <th>Mata Kuliah</th>
@@ -40,12 +41,26 @@
                             </thead>
                             <tbody>
                                 <?php $no = 0; ?>
-                                <?php foreach ($get_data as $data) { ?>
+                                <?php foreach ($get_data as $data) {
+                                    $end_date = date_create($data->end_date);
+                                    $current_date = date_create(date('Y-m-d'));
+                                ?>
                                 <tr class="odd gradeX">
                                     <td width="1%" class="f-s-600 text-inverse"> <?php echo ++$no ?> </td>
                                     <td><?= $data->invoice ?></td>
                                     <td><?= $data->start_date ?></td>
                                     <td><?= $data->end_date ?></td>
+                                    <td>
+                                        <?php if ($current_date > $end_date) { ?>
+                                        <button type="button" class="btn btn-sm btn-danger">
+                                            Telat
+                                        </button>
+                                        <?php } else { ?>
+                                        <button type="button" class="btn btn-sm btn-success">
+                                            Belum Telat
+                                        </button>
+                                        <?php } ?>
+                                    </td>
                                     <td><?= $data->amount ?> Item</td>
                                     <td><?= $data->needs_name ?></td>
                                     <td><?= $data->course_name ?></td>

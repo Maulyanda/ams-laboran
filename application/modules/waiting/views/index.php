@@ -140,6 +140,11 @@
 <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
 <script>
 $(document).ready(function() {
+    $("#data-table-combine").dataTable({
+        dom: "Bfrtip",
+        buttons: ["excel"],
+        responsive: true
+    });
     $('#modal_approve').on('show.bs.modal', function(event) {
             var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
             var modal = $(this) // Isi nilai pada field
@@ -147,7 +152,6 @@ $(document).ready(function() {
         }
 
     );
-
     $('#modal_rejected').on('show.bs.modal', function(event) {
             var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
             var modal = $(this) // Isi nilai pada field

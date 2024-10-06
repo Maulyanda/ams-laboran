@@ -68,47 +68,15 @@
             </div>
         </div>
     </div>
-    <div id="modal_approve" class="modal fade" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Approve Pengembalian</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-
-                <form action="<?= base_url() ?>dashboard/process/approve_data" method="post">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <div class="row">
-                                <input type="hidden" id="id" name="id">
-                                <div class="col-sm-12">
-                                    <label>Catatan Pengembalian</label>
-                                    <textarea class="form-control" name="notes" required></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link" aria-hidden="true"
-                            data-dismiss="modal"><?php echo $lang_close; ?></button>
-                        <button type="submit" class="btn btn-success"><?php echo $lang_submit; ?></button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
 <script>
 $(document).ready(function() {
-    $('#modal_approve').on('show.bs.modal', function(event) {
-            var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
-            var modal = $(this) // Isi nilai pada field
-            modal.find('#id').attr("value", div.data('id'));
-        }
-
-    );
+    $("#data-table-combine").dataTable({
+        dom: "Bfrtip",
+        buttons: ["excel"],
+        responsive: true
+    });
 });
 </script>

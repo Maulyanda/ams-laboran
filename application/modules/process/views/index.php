@@ -120,12 +120,15 @@
 <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
 <script>
 $(document).ready(function() {
+    $("#data-table-combine").dataTable({
+        dom: "Bfrtip",
+        buttons: ["excel"],
+        responsive: true
+    });
     $('#modal_approve').on('show.bs.modal', function(event) {
-            var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
-            var modal = $(this) // Isi nilai pada field
-            modal.find('#id').attr("value", div.data('id'));
-        }
-
-    );
+        var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
+        var modal = $(this) // Isi nilai pada field
+        modal.find('#id').attr("value", div.data('id'));
+    });
 });
 </script>

@@ -11,7 +11,7 @@
     <ul class="navbar-nav navbar-right">
         <li class="dropdown navbar-user">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="<?= $this->session->userdata('profile_picture') ?>" alt="" />
+                <img src="<?= base_url('assets/img/user/user.png') ?>" alt="" />
                 <span class="d-none d-md-inline"><?= $this->session->userdata('first_name') ?></span> <b
                     class="caret"></b>
             </a>

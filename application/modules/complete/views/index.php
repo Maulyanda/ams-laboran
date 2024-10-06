@@ -82,7 +82,7 @@
                             <div class="row">
                                 <input type="hidden" id="id" name="id">
                                 <div class="col-sm-12">
-                                    <label>Catatan Pengemablian</label>
+                                    <label>Catatan Pengembalian</label>
                                     <textarea class="form-control" name="notes" required></textarea>
                                 </div>
                             </div>

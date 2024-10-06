@@ -6,7 +6,7 @@
                 <a href="javascript:;" data-toggle="nav-profile">
                     <div class="cover with-shadow"></div>
                     <div class="image">
-                        <img src="<?= $this->session->userdata('profile_picture') ?>" alt="" />
+                        <img src="<?= base_url('assets/img/user/user.png') ?>" alt="" />
                     </div>
                     <div class="info">
                         <b class="caret pull-right"></b>

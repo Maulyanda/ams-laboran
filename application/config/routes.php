@@ -74,13 +74,16 @@ $route['dashboard/loans/detail'] = 'loans/detail';
 $route['dashboard/incoming/list'] = 'incoming/list';
 $route['dashboard/incoming/approve_data'] = 'incoming/approve_data';
 $route['dashboard/incoming/rejected_data'] = 'incoming/rejected_data';
+$route['dashboard/incoming/view'] = 'incoming/view';
 
 $route['dashboard/waiting/list'] = 'waiting/list';
 $route['dashboard/waiting/approve_data'] = 'waiting/approve_data';
 $route['dashboard/waiting/rejected_data'] = 'waiting/rejected_data';
+$route['dashboard/waiting/view'] = 'waiting/view';
 
 $route['dashboard/process/list'] = 'process/list';
 $route['dashboard/process/approve_data'] = 'process/approve_data';
+$route['dashboard/process/view'] = 'process/view';
 
 $route['dashboard/complete/list'] = 'complete/list';
 $route['dashboard/complete/view'] = 'complete/view';

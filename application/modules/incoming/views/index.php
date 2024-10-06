@@ -3,7 +3,7 @@
         <li class="breadcrumb-item"><a href="#">Incoming</a></li>
         <li class="breadcrumb-item"><a href="#">Data</a></li>
     </ol>
-    <h1 class="page-header"><b>Data Submission</b></h1>
+    <h1 class="page-header"><b>List Pengajuan - Menunggu Persetujuan</b></h1>
     <div class="row">
         <div class="col-xl-12">
             <div class="panel panel-inverse">

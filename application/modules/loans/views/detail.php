@@ -32,10 +32,12 @@
             <div class="invoice-to">
                 <small>Tanggal</small>
                 <address class="m-t-5 m-b-5">
-                    Pinjam: <?php $date = date_create($loans->start_date);
-                            echo date_format($date, "F d, Y") ?><br />
-                    Dikembalikan: <?php $date = date_create($loans->end_date);
-                                    echo date_format($date, "F d, Y") ?><br />
+                    Pinjam:
+                    <?= date_format(date_create($loans->start_date), "F d, Y") ?><br />
+                    Pengembalian:
+                    <?= date_format(date_create($loans->end_date), "F d, Y") ?><br />
+                    Dikembalikan:
+                    <?= $loans->return_date == NULL ? '' : date_format(date_create($loans->return_date), "F d, Y") ?><br />
                 </address>
             </div>
             <div class="invoice-date">

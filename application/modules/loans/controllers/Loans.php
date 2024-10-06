@@ -35,11 +35,11 @@ class Loans extends CI_Controller
                     $this->load->view("include/alert");
                } else {
                     $this->session->set_flashdata('success', 'Upsss!!!, Anda tidak mempunyai akses untuk halaman');
-                    redirect('admin/home');
+                    redirect('dashboard/home');
                }
           } else {
                $this->session->set_flashdata('success', 'Upsss!!!, Login dulu ya.');
-               redirect('admin/login');
+               redirect('dashboard/login');
           }
      }
 

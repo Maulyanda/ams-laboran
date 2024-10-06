@@ -81,3 +81,12 @@ $route['dashboard/waiting/rejected_data'] = 'waiting/rejected_data';
 
 $route['dashboard/process/list'] = 'process/list';
 $route['dashboard/process/approve_data'] = 'process/approve_data';
+
+$route['dashboard/complete/list'] = 'complete/list';
+$route['dashboard/complete/view'] = 'complete/view';
+
+$route['dashboard/late/list'] = 'late/list';
+$route['dashboard/late/view'] = 'late/view';
+
+$route['dashboard/reject/list'] = 'reject/list';
+$route['dashboard/reject/view'] = 'reject/view';

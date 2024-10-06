@@ -1,9 +1,9 @@
 <div id="content" class="content">
     <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item"><a href="#">Waiting</a></li>
+        <li class="breadcrumb-item"><a href="#">Complete</a></li>
         <li class="breadcrumb-item"><a href="#">Data</a></li>
     </ol>
-    <h1 class="page-header"><b>List Pengajuan - Menunggu Pengambilan</b></h1>
+    <h1 class="page-header"><b>List Pengajuan - Telah Selesai</b></h1>
     <div class="row">
         <div class="col-xl-12">
             <div class="panel panel-inverse">
@@ -31,6 +31,7 @@
                                     <th width="1%">#</th>
                                     <th>Invoice</th>
                                     <th>Tanggal Pinjam</th>
+                                    <th>Tanggal Pengembalian</th>
                                     <th>Tanggal Dikembalikan</th>
                                     <th>Total Alat</th>
                                     <th>Kebutuhan</th>
@@ -46,6 +47,7 @@
                                     <td><?= $data->invoice ?></td>
                                     <td><?= $data->start_date ?></td>
                                     <td><?= $data->end_date ?></td>
+                                    <td><?= $data->return_date ?></td>
                                     <td><?= $data->amount ?> Item</td>
                                     <td><?= $data->needs_name ?></td>
                                     <td><?= $data->course_name ?></td>
@@ -53,14 +55,6 @@
                                     <td>
                                         <a href="<?= base_url('dashboard/loans/detail?id=' . $data->id) ?>"
                                             class="btn btn-sm btn-primary"><i class="fa fas fa-eye"></i></a>
-                                        <button type="button" class="btn btn-sm btn-success" data-toggle="modal"
-                                            data-target="#modal_approve" data-id="<?= $data->id ?>">
-                                            <i class="fa fas fa-check"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
-                                            data-target="#modal_rejected" data-id="<?= $data->id ?>">
-                                            <i class="fa fas fa-times"></i>
-                                        </button>
                                     </td>
                                 </tr>
                                 <?php } ?>
@@ -78,48 +72,17 @@
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Approve Peminjaman</h5>
+                    <h5 class="modal-title">Approve Pengembalian</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
 
-                <form action="<?= base_url() ?>dashboard/waiting/approve_data" method="post">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <div class="row">
-                                <input type="hidden" id="id" name="id">
-                                <input type="hidden" id="status" name="approved">
-                                <div class="col">
-                                    <p>Apakah Anda yakin alat yang dipinjamkan sudah diberikan kepada peminjam?</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link" aria-hidden="true"
-                            data-dismiss="modal"><?php echo $lang_close; ?></button>
-                        <button type="submit" class="btn btn-success"><?php echo $lang_submit; ?></button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div id="modal_rejected" class="modal fade" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Reject Peminjaman</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-
-                <form action="<?= base_url() ?>dashboard/waiting/rejected_data" method="post">
+                <form action="<?= base_url() ?>dashboard/process/approve_data" method="post">
                     <div class="modal-body">
                         <div class="form-group">
                             <div class="row">
                                 <input type="hidden" id="id" name="id">
                                 <div class="col-sm-12">
-                                    <label>Alasan Rejected</label>
+                                    <label>Catatan Pengemablian</label>
                                     <textarea class="form-control" name="notes" required></textarea>
                                 </div>
                             </div>
@@ -141,14 +104,6 @@
 <script>
 $(document).ready(function() {
     $('#modal_approve').on('show.bs.modal', function(event) {
-            var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
-            var modal = $(this) // Isi nilai pada field
-            modal.find('#id').attr("value", div.data('id'));
-        }
-
-    );
-
-    $('#modal_rejected').on('show.bs.modal', function(event) {
             var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
             var modal = $(this) // Isi nilai pada field
             modal.find('#id').attr("value", div.data('id'));

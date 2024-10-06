@@ -3,7 +3,7 @@
         <li class="breadcrumb-item"><a href="#">Process</a></li>
         <li class="breadcrumb-item"><a href="#">Data</a></li>
     </ol>
-    <h1 class="page-header"><b>Daftar alat yang dipinjamkan</b></h1>
+    <h1 class="page-header"><b>List Pengajuan - Berhasil dipinjamkan</b></h1>
     <div class="row">
         <div class="col-xl-12">
             <div class="panel panel-inverse">

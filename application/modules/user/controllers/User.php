@@ -63,7 +63,7 @@ class User extends CI_Controller
             }
         } else {
             $this->session->set_flashdata('success', 'Upsss!!!, Login dulu ya.');
-            redirect('admin/login');
+            redirect('dashboard/login');
         }
     }
 

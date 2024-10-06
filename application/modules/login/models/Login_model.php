@@ -28,14 +28,14 @@ class Login_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('users');
-        $this->db->where('username', $username);
+        $this->db->where('username', $username)->or_where('email', $username);
 
         $query = $this->db->get();
 
         if ($query->num_rows() > 0) {
             $data_user = $query->row();
 
-            $this->db->where('username', $username);
+            $this->db->where('username', $username)->or_where('email', $username);
             $this->db->where("password='$password'");
 
             $result = $this->db->get('users')->result();
@@ -60,19 +60,19 @@ class Login_model extends CI_Model
                         $this->session->set_flashdata('success', 'Selamat datang di aplikasi ' . $info->title);
                         return TRUE;
                     } else {
-                        $this->session->set_flashdata('success', 'Account anda di reject, silahkan hubungi pihak laboran.');
+                        $this->session->set_flashdata('success', 'Account anda di reject, silahkan hubungi pihak laboran informatika.');
                         return FALSE;
                     }
                 } else {
-                    $this->session->set_flashdata('success', 'Account anda belum di approve, silahkan menunggu.');
+                    $this->session->set_flashdata('success', 'Account anda belum di approve, silahkan menunggu atau menghubungi pihak laboran informatika.');
                     return FALSE;
                 }
             } else {
-                $this->session->set_flashdata('success', 'Password Anda Salah!!!');
+                $this->session->set_flashdata('success', 'Password yang anda Masukkan Salah!!!');
                 return FALSE;
             }
         } else {
-            $this->session->set_flashdata('success', 'NIP/NPM Anda Salah!!!');
+            $this->session->set_flashdata('success', 'NIP/NPM atau Email yang anda Masukkan Salah!!!');
             return FALSE;
         }
     }

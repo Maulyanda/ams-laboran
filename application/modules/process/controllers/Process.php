@@ -100,7 +100,7 @@ class Process extends CI_Controller
             // Insert History
             $history['loans_id'] = $id;
             $history['user_id'] = $this->session->userdata('id');
-            $history['status'] = 'late';
+            $history['status'] = 'returned';
             $history['date'] = date('Y-m-d H:i:s');
 
             $this->Process_model->insertData('loans_history', $history);

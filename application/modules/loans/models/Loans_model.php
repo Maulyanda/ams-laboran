@@ -13,6 +13,16 @@ class Loans_model extends CI_Model
             ->get()->result();
     }
 
+    public function getLoansHistory($id)
+    {
+        return $this->db->select('lh.*, us.first_name')
+            ->from('loans_history as lh')
+            ->join('users as us', 'lh.user_id = us.user_id')
+            ->where('lh.loans_id', $id)
+            ->order_by('id', 'ASC')
+            ->get()->result();
+    }
+
     public function dataEquipment()
     {
         return $this->db->select('*')->from('equipment')->where('is_active', 1)->get()->result();

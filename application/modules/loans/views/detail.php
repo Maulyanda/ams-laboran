@@ -87,6 +87,33 @@
             </div>
             <!-- end invoice-price -->
         </div>
+        <div class="invoice-header">
+            <div class="invoice-from">
+                <small>History Peminjam</small>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-invoice">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th class="text-left" width="10%">Status</th>
+                        <th class="text-left" width="15%">Datetime</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($loans_history as $r) { ?>
+                    <tr>
+                        <td>
+                            <span class="text-inverse"><?= $r->first_name ?></span><br />
+                        </td>
+                        <td class="text-left"><?= $r->status ?></td>
+                        <td class="text-left"><?= $r->date ?></td>
+                    <tr>
+                        <?php } ?>
+                </tbody>
+            </table>
+        </div>
         <!-- end invoice-content -->
         <!-- begin invoice-note -->
         <div class="invoice-note">

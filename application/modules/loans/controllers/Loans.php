@@ -168,6 +168,7 @@ class Loans extends CI_Controller
           $id = $this->input->get('id');
 
           $x['loans'] = $this->modelLoans->get_loans($id);
+          $x['loans_history'] = $this->modelLoans->getLoansHistory($id);
           $x['detail_loans'] = $this->modelLoans->detail_loans($id);
 
           $this->load->view("include/backend/head");

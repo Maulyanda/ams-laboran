@@ -35,14 +35,9 @@ class Login_model extends CI_Model
         if ($query->num_rows() > 0) {
             $data_user = $query->row();
 
-            $this->db->where('username', $username)->or_where('email', $username);
-            $this->db->where("password='$password'");
-
-            $result = $this->db->get('users')->result();
-
-            if (!empty($result)) {
-                if ($result[0]->status != 'pending') {
-                    if ($result[0]->status != 'rejected') {
+            if ($data_user->password == $password) {
+                if ($data_user->status != 'pending') {
+                    if ($data_user->status != 'rejected') {
                         $this->session->set_userdata('id', $data_user->user_id);
                         $this->session->set_userdata('first_name', $data_user->first_name);
                         $this->session->set_userdata('last_name', $data_user->last_name);

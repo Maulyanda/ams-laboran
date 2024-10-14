@@ -88,8 +88,7 @@
 
                                 <div class="col-sm-6">
                                     <label><?php echo $lang_table_name; ?></label>
-                                    <input type="text" name="name" placeholder="Nama MK..." class="form-control"
-                                        required>
+                                    <input type="text" name="name" placeholder="Nama..." class="form-control" required>
                                 </div>
 
                                 <div class="col-sm-12">

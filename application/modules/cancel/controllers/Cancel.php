@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Reject extends CI_Controller
+class Cancel extends CI_Controller
 {
     private $contoller_name;
     private $function_name;
@@ -11,7 +11,7 @@ class Reject extends CI_Controller
         parent::__construct();
         $this->contoller_name = $this->router->class;
         $this->function_name = $this->router->method;
-        $this->load->model('Reject_model');
+        $this->load->model('Cancel_model');
         $this->load->model('Dashboard_model');
     }
 
@@ -21,9 +21,9 @@ class Reject extends CI_Controller
             $user_level = $this->session->userdata('users_level');
             $check_permission =  $this->Dashboard_model->check_permissions($this->contoller_name, $this->function_name, $user_level);
             if ($check_permission->num_rows() == 1) {
-                $page_data['get_data'] = $this->Reject_model->getData();
+                $page_data['get_data'] = $this->Cancel_model->getData();
 
-                $page_data['page_name'] = 'Reject';
+                $page_data['page_name'] = 'Cancel';
 
                 $page_data['lang_submit'] = 'Simpan';
                 $page_data['lang_edit'] = 'Ubah';
@@ -58,9 +58,9 @@ class Reject extends CI_Controller
             $user_level = $this->session->userdata('users_level');
             $check_permission =  $this->Dashboard_model->check_permissions($this->contoller_name, $this->function_name, $user_level);
             if ($check_permission->num_rows() == 1) {
-                $page_data['get_data'] = $this->Reject_model->getDataBy($this->session->userdata('id'));
+                $page_data['get_data'] = $this->Cancel_model->getDataBy($this->session->userdata('id'));
 
-                $page_data['page_name'] = 'Reject';
+                $page_data['page_name'] = 'Cancel';
 
                 $page_data['lang_submit'] = 'Simpan';
                 $page_data['lang_edit'] = 'Ubah';

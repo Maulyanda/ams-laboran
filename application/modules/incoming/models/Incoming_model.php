@@ -26,6 +26,15 @@ class Incoming_model extends CI_Model
             ->get()->result();
     }
 
+    public function CheckStatus($id)
+    {
+        return $this->db->select('*')
+            ->from('loans')
+            ->where('status="submission"')
+            ->where('id=' . $id)
+            ->get()->result();
+    }
+
     public function detail_loans($id)
     {
         return $this->db->select('*')

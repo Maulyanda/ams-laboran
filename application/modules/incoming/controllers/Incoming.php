@@ -122,6 +122,8 @@ class Incoming extends CI_Controller
         $history['status'] = 'rejected';
         $history['date'] = date('Y-m-d H:i:s');
 
+        $this->Incoming_model->insertData('loans_history', $history);
+
         $this->session->set_flashdata('success', 'Data Peminjaman Berhasil di Reject');
         redirect('dashboard/incoming/list');
     }
@@ -160,6 +162,34 @@ class Incoming extends CI_Controller
         } else {
             $this->session->set_flashdata('success', 'Upsss!!!, Login dulu ya.');
             redirect('dashboard/login');
+        }
+    }
+
+    public function cancel_data()
+    {
+        $id = $this->input->post('id', TRUE);
+
+        $check_status = $this->Incoming_model->CheckStatus($id);
+
+        if ($check_status[0]->status == 'submission') {
+            // Proses Cancel
+            $loans['status'] = 'cancel';
+            $loans['notes'] = $this->input->post('notes', TRUE);
+            $this->Incoming_model->updateData('loans', $id, $loans);
+
+            // Insert History
+            $history['loans_id'] = $id;
+            $history['user_id'] = $this->session->userdata('id');
+            $history['status'] = 'cancel';
+            $history['date'] = date('Y-m-d H:i:s');
+
+            $this->Incoming_model->insertData('loans_history', $history);
+
+            $this->session->set_flashdata('success', 'Data Peminjaman Berhasil di Cancel');
+            redirect('dashboard/incoming/view');
+        } else {
+            $this->session->set_flashdata('success', 'Cancel tidak dapat dilakukan');
+            redirect('dashboard/incoming/view');
         }
     }
 }

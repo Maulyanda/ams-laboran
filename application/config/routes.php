@@ -75,6 +75,7 @@ $route['dashboard/incoming/list'] = 'incoming/list';
 $route['dashboard/incoming/approve_data'] = 'incoming/approve_data';
 $route['dashboard/incoming/rejected_data'] = 'incoming/rejected_data';
 $route['dashboard/incoming/view'] = 'incoming/view';
+$route['dashboard/incoming/cancel_data'] = 'incoming/cancel_data';
 
 $route['dashboard/waiting/list'] = 'waiting/list';
 $route['dashboard/waiting/approve_data'] = 'waiting/approve_data';
@@ -93,3 +94,6 @@ $route['dashboard/late/view'] = 'late/view';
 
 $route['dashboard/reject/list'] = 'reject/list';
 $route['dashboard/reject/view'] = 'reject/view';
+
+$route['dashboard/cancel/list'] = 'cancel/list';
+$route['dashboard/cancel/view'] = 'cancel/view';

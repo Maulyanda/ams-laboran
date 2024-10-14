@@ -1,6 +1,6 @@
 <div id="content" class="content">
     <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item"><a href="#">Late</a></li>
+        <li class="breadcrumb-item"><a href="#">Reject</a></li>
         <li class="breadcrumb-item"><a href="#">Data</a></li>
     </ol>
     <h1 class="page-header"><b>List Pengajuan - Tidak Diterima</b></h1>

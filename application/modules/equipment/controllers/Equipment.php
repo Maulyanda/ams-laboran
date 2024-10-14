@@ -67,7 +67,10 @@ class Equipment extends CI_Controller
 
     function insert_equipment()
     {
+        $code = strtoupper(str_replace(' ', '', $this->input->post('name', TRUE))) . '/' . 'INF' . '/' . date('Y') . '/' . date('d');
+
         $data = array(
+            'code' => $code,
             'categories_id' => $this->input->post('categories_id', TRUE),
             'name' => ucwords($this->input->post('name', TRUE)),
             'description' => ucwords($this->input->post('description', TRUE)),
@@ -76,6 +79,16 @@ class Equipment extends CI_Controller
         );
 
         $this->Equipment_model->insertData('equipment', $data);
+        $check = $this->Equipment_model->check('equipment', 'code', $code);
+
+        $history_stock['equipment_id'] = $check[0]->id;
+        $history_stock['user_id'] = $this->session->userdata('id');
+        $history_stock['from'] = $this->input->post('qty', TRUE);
+        $history_stock['to'] = $this->input->post('qty', TRUE);
+        $history_stock['created_at'] = date('Y-m-d H:i:s');
+
+        $this->Equipment_model->insertData('equipment_stock_history', $history_stock);
+
         $this->session->set_flashdata('success', 'Alat Berhasil Ditambahkan');
 
         redirect('equipment/list');
@@ -91,6 +104,28 @@ class Equipment extends CI_Controller
         $this->Equipment_model->DeleteData('equipment', $id, $data);
         $this->session->set_flashdata('success', 'Alat Berhasil Dihapus');
 
+        redirect('equipment/list');
+    }
+
+    public function add_stock()
+    {
+        $id = $this->input->post('id', TRUE);
+        $check = $this->Equipment_model->check('equipment', 'id', $id);
+        $check_history = $this->Equipment_model->check('equipment_stock_history', 'equipment_id', $id);
+
+        $equipment['qty'] = $check[0]->qty + $this->input->post('stock', TRUE);;
+        $this->Equipment_model->updateData('equipment', $id, $equipment);
+
+        $stock_history = $check_history[0]->to + $this->input->post('stock', TRUE);
+        $history_stock['equipment_id'] = $check[0]->id;
+        $history_stock['user_id'] = $this->session->userdata('id');
+        $history_stock['from'] = $check_history[0]->to;
+        $history_stock['to'] = $stock_history;
+        $history_stock['created_at'] = date('Y-m-d H:i:s');
+
+        $this->Equipment_model->insertData('equipment_stock_history', $history_stock);
+
+        $this->session->set_flashdata('success', 'Stock Alat Berhasil Ditambahkan');
         redirect('equipment/list');
     }
 

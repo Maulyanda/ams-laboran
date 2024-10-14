@@ -58,6 +58,11 @@
                                     </td>
                                     <td><?php echo $data->created_at ?></td>
                                     <td>
+                                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                            data-target="#modal_add_stock" data-id="<?= $data->id ?>"
+                                            data-name=" <?= $data->name ?>">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
                                         <button type="button" class="btn btn-danger" data-toggle="modal"
                                             data-target="#modal_delete_equipment" data-id="<?= $data->id ?>"
                                             data-name=" <?= $data->name ?>">
@@ -173,6 +178,37 @@
         </div>
     </div>
 
+    <div id="modal_add_stock" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Stock</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+
+                <form action="<?= base_url() ?>equipment/add_stock" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <input type="hidden" id="id" name="id">
+                                <div class="col">
+                                    <label>Stock</label>
+                                    <input type="number" class="form-control" name="stock" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link" aria-hidden="true"
+                            data-dismiss="modal"><?php echo $lang_close; ?></button>
+                        <button type="submit" class="btn bg-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
@@ -185,6 +221,12 @@ $(document).ready(function() {
     });
 
     $('#modal_delete_equipment').on('show.bs.modal', function(event) {
+        var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
+        var modal = $(this) // Isi nilai pada field
+        modal.find('#id').attr("value", div.data('id'));
+    });
+
+    $('#modal_add_stock').on('show.bs.modal', function(event) {
         var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
         var modal = $(this) // Isi nilai pada field
         modal.find('#id').attr("value", div.data('id'));

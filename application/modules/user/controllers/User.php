@@ -105,7 +105,7 @@ class User extends CI_Controller
         }
 
         $this->modelUser->updateUser('users', $id, $data);
-        $this->session->set_flashdata('success', 'Users Berhasil di ' + $this->input->post('status', TRUE));
+        $this->session->set_flashdata('success', 'Users Berhasil di ' . $this->input->post('status', TRUE));
 
         redirect('user/list');
     }

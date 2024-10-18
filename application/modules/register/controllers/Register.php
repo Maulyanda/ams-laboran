@@ -58,6 +58,7 @@ class Register extends CI_Controller
           $data['email'] = $this->input->post('email');
           $data['password'] = MD5($this->input->post('password'));
           $data['is_active'] = 0;
+          $data['users_level'] = 5;
           $data['status'] = 'pending';
 
           if ($this->modelRegister->insertData('users', $data)) {

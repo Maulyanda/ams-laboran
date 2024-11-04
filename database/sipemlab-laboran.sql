@@ -492,8 +492,7 @@ CREATE TABLE `users` (
 -- Records of users
 -- ----------------------------
 BEGIN;
-INSERT INTO `users` (`user_id`, `login_oauth_uid`, `first_name`, `last_name`, `username`, `email`, `password`, `identity_card`, `profile_picture`, `created_at`, `updated_at`, `users_level`, `is_active`, `status`) VALUES (1, NULL, 'Maulyanda', 'Maulyanda', '199708242024061001', 'maulyanda@usk.ac.id', '62678c10637dcf79703312e7280b9c7c', NULL, NULL, '2022-02-06 10:03:13', '2022-02-06 10:35:53', 1, 1, 'approved');
-INSERT INTO `users` (`user_id`, `login_oauth_uid`, `first_name`, `last_name`, `username`, `email`, `password`, `identity_card`, `profile_picture`, `created_at`, `updated_at`, `users_level`, `is_active`, `status`) VALUES (8, NULL, 'Dwipa', 'Junika', '199406022024061002', 'dwipajunikaputra@usk.ac.id', 'd5d4f825ce3503a5592c8e874775d419', 'DATA20241008010655.png', NULL, '2024-10-08 13:06:55', '2024-10-08 13:06:55', 3, 1, 'approved');
+INSERT INTO `users` (`user_id`, `login_oauth_uid`, `first_name`, `last_name`, `username`, `email`, `password`, `identity_card`, `profile_picture`, `created_at`, `updated_at`, `users_level`, `is_active`, `status`) VALUES (1, NULL, 'Super Admin', 'Super Admin', '1234567890', 'superadmin@usk.ac.id', '62678c10637dcf79703312e7280b9c7c', NULL, NULL, '2022-02-06 10:03:13', '2022-02-06 10:35:53', 1, 1, 'approved');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
